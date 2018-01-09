@@ -16,6 +16,8 @@ if [[ estadomaq1 == 'RUNNING' and estadomaq2 == 'STOPPED' ]]; then
     iptables -I FORWARD -d $ip2/32 -p tcp --dport 80 -j ACCEPT
     iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination $ip2:80
 
+    mount /dev/disco/lv1 /mnt/debian2/var/www/html/
+
 
   fi
 elif [[ estadomaq1 == 'STOPPED' and estadomaq2 == 'STOPPED' ]]; then
