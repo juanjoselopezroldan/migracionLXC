@@ -5,7 +5,7 @@ estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
 echo $estadocont1
 echo $estadocont2
 
-if [[ estadocont1 == "RUNNING" ]] && [[ estadocont2 == "STOPPED" ]]; then
+if [[ estadocont1 == "RUNNING" ]]; then
   memoria1=$(lxc-info -n debian1 | grep 'Memory use' | tr -s " " | cut -d " " -f 3)
   if [[ $memoria1 -ge '470.00' ]]; then
     ip1=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 |  head -2 | tail -1)
@@ -22,8 +22,7 @@ if [[ estadocont1 == "RUNNING" ]] && [[ estadocont2 == "STOPPED" ]]; then
     mount /dev/disco/lv1 /mnt/debian2/var/www/html/
     echo "prueba"
   fi
-fi
-if [[ estadocont1 == "STOPPED" ]] && [[ estadocont2 == "STOPPED" ]]; then
+else
   echo "Contenedor 1 inactivo, levantando..."
   lxc-start -n debian1
   echo "Montando volumen y obteniendo IP para regla de IPTABLES"
