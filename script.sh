@@ -5,7 +5,7 @@ estadocont1=$(lxc-ls -f | grep debian1 | tr -s " " | cut -d " " -f 2)
 
 estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
 
-if [ estadocont1 == "RUNNING" ];
+if [ $estadocont1 == "RUNNING" ];
 then
   memoria1=$(lxc-info -n debian1 | grep 'Memory use' | tr -s " " | cut -d " " -f 3)
   if [ $memoria1 -ge '470.00' ];
@@ -25,7 +25,7 @@ then
     echo "prueba"
   fi
 else
-  if [ estadocont2 == "STOPPED" ];
+  if [ $estadocont2 == "STOPPED" ];
   then
     echo "Contenedor 1 inactivo, levantando..."
     lxc-start -n debian1
@@ -38,6 +38,7 @@ else
     echo "Contenedor 1 Operativo"
   fi
 fi
+
 
 #if [[ estadocont2 == "RUNNING" ]]; then
 #  memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3)
