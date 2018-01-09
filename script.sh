@@ -3,7 +3,13 @@
 estadomaq1=$(lxc-ls -f | grep debian1 | tr -s " " | cut -d " " -f 2)
 estadomaq2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
 if [[ estadomaq1 == 'RUNNING' and estadomaq2 == 'STOPPED' ]]; then
+  memoria1=$(lxc-info -n debian1 | grep 'Memory use' | tr -s " " | cut -d " " -f 3)
+  if [[ $memoria1 -ge '470.00' ]]; then
+    ip1=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 |  head -2 | tail -1)
+    
 
+
+  fi
 elif [[ estadomaq1 == 'STOPPED' and estadomaq2 == 'STOPPED' ]]; then
   lxc-start -n debian1
   sleep 2
