@@ -11,7 +11,8 @@ then
   if [[ $memoria1 -ge "470" ]];
   then
     ip1=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 |  head -2 | tail -1)
-    iptables -t nat -D PREROUTING $ip1
+    delip=$(iptables -t nat -L --line-number | egrep $ip1 | cut -d " " -f 1)
+    iptables -t nat -D PREROUTING $delip
 
     umount /mnt/debian1/var/www/html/
     lxc-stop -n debian1
