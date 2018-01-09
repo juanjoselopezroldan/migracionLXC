@@ -20,7 +20,7 @@ if [[ estadocont1 == "RUNNING" ]] && [[ estadocont2 == "STOPPED" ]]; then
     mount /dev/disco/lv1 /mnt/debian2/var/www/html/
 
   fi
-elif [[ estadocont1 == "STOPPED" and estadocont2 == "STOPPED" ]]; then
+elif [[ estadocont1 == "STOPPED" ]] && [[ estadocont2 == "STOPPED" ]]; then
   echo "Contenedor 1 inactivo, levantando..."
   lxc-start -n debian1
   echo "Montando volumen y obteniendo IP para regla de IPTABLES"
@@ -32,7 +32,7 @@ elif [[ estadocont1 == "STOPPED" and estadocont2 == "STOPPED" ]]; then
   echo "Contenedor 1 Operativo"
 fi
 
-#if [[ estadocont2 == "RUNNING"]]; then
+#if [[ estadocont2 == "RUNNING" ]]; then
 #  memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3)
 #  if [[ $memoria2 -ge '980.00' ]]; then
     #statements
