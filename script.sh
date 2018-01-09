@@ -8,7 +8,7 @@ estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
 if [[ $estadocont1 == "RUNNING" ]];
 then
   memoria1=$(lxc-info -n debian1 | grep 'Memory use' | tr -s " " | cut -d " " -f 3)
-  if [[ $memoria1 -ge '470.00' ]];
+  if [[ $memoria1 -ge "470.00" ]];
   then
     ip1=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 |  head -2 | tail -1)
     iptables -t nat -D PREROUTING $ip1
