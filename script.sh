@@ -9,7 +9,7 @@ if [[ estadomaq1 == 'RUNNING' and estadomaq2 == 'STOPPED' ]]; then
     iptables -t nat -D PREROUTING $ip1
 
     umount /mnt/debian1/var/www/html/
-
+    lxc-stop -n debian1
     lxc-start -n debian2
 
     ip2=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 | tail -1)
