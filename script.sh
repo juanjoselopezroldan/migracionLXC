@@ -29,9 +29,9 @@ elif [[ estadomaq1 == 'STOPPED' and estadomaq2 == 'STOPPED' ]]; then
   iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination $ip1:80
 fi
 
-if [[ estadomaq2 == 'RUNNING']]; then
-  memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3)
-  if [[ $memoria2 -ge '980.00' ]]; then
+#if [[ estadomaq2 == 'RUNNING']]; then
+#  memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3)
+#  if [[ $memoria2 -ge '980.00' ]]; then
     #statements
-  fi
-fi
+#  fi
+#fi
