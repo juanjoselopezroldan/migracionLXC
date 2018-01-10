@@ -31,18 +31,15 @@ while [[ $bucle == "si" ]]; do
       bucle="no"
     fi
   else
-    if [[ $estadocont1 == "STOPPED" ]] ;
-    then
-      echo "Contenedor 1 inactivo, levantando..."
-      lxc-start -n debian1
-      echo "Montando volumen y obteniendo IP para regla de IPTABLES"
-      sleep 2
-      mount /dev/disco/lv1 /mnt/debian1/var/www/html/
-      ip1=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 |  head -2 | tail -1)
-      iptables -I FORWARD -d $ip1/32 -p tcp --dport 80 -j ACCEPT
-      iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination $ip1:80
-      echo "Contenedor 1 Operativo"
-    fi
+    echo "Contenedor 1 inactivo, levantando..."
+    lxc-start -n debian1
+    echo "Montando volumen y obteniendo IP para regla de IPTABLES"
+    sleep 2
+    mount /dev/disco/lv1 /mnt/debian1/var/www/html/
+    ip1=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 |  head -2 | tail -1)
+    iptables -I FORWARD -d $ip1/32 -p tcp --dport 80 -j ACCEPT
+    iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination $ip1:80
+    echo "Contenedor 1 Operativo"
   fi
   sleep 2
 done
