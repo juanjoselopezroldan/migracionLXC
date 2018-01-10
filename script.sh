@@ -8,6 +8,7 @@ while [[ bucle == "si" ]]; do
   if [[ $estadocont1 == "RUNNING" ]];
   then
     memoria1=$(lxc-info -n debian1 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
+    echo $memoria1
     if [[ $memoria1 -ge "470" ]];
     then
       echo "Desaciendo iptables y apagando contenedor 1"
@@ -42,8 +43,12 @@ while [[ bucle == "si" ]]; do
       echo "Contenedor 1 Operativo"
     fi
   fi
+  sleep 2
 done
 
+while [[ bucle == "si" ]]; do
+  #statements
+done
 if [[ estadocont2 == "RUNNING" ]];
 then
   memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
