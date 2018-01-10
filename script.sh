@@ -4,7 +4,7 @@ echo "Iniciando"
 estadocont1=$(lxc-ls -f | grep debian1 | tr -s " " | cut -d " " -f 2)
 bucle="si"
 estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
-while [[ bucle == "si" ]]; do
+while [[ $bucle == "si" ]]; do
   if [[ $estadocont1 == "RUNNING" ]];
   then
     memoria1=$(lxc-info -n debian1 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
@@ -47,7 +47,7 @@ while [[ bucle == "si" ]]; do
 done
 
 bucle="si"
-while [[ bucle == "si" ]]; do
+while [[ $bucle == "si" ]]; do
   if [[ estadocont2 == "RUNNING" ]];
   then
     memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
