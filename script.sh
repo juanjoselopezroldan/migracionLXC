@@ -30,7 +30,7 @@ while [[ $bucle == "si" ]]; do
       bucle="no"
     fi
   else
-    if [[ $estadocont2 == "STOPPED" ]];
+    if [[ $estadocont2 == "STOPPED" ]] && [[ $estadocont1 == "STOPPED" ]] ;
     then
       echo "Contenedor 1 inactivo, levantando..."
       lxc-start -n debian1
