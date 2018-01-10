@@ -59,4 +59,5 @@ while [[ $bucle == "si" ]]; do
       bucle="no"
     fi
   fi
+  sleep 2
 done
