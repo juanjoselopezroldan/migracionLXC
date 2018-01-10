@@ -2,7 +2,10 @@
 echo "Iniciado"
 
 estadocont1=$(lxc-ls -f | grep debian1 | tr -s " " | cut -d " " -f 2)
+estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
+
 echo $estadocont1
+echo $estadocont2
 
 if [[ $estadocont1 == "RUNNING" ]];
 then
@@ -35,7 +38,8 @@ then
     echo "Contenedor 2 Operativo"
   fi
 else
-  if [[ $estadocont2 == "STOPPED" ]];then
+  if [[ $estadocont2 == "STOPPED" ]];
+  then
     echo "Contenedor 1 inactivo, levantando..."
     lxc-start -n debian1
     echo "Montando volumen y obteniendo IP para regla de IPTABLES"
@@ -47,8 +51,6 @@ else
     echo "Contenedor 1 Operativo"
   fi
 fi
-
-estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
 
 if [[ $estadocont2 == "RUNNING" ]];
 then
