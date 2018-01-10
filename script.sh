@@ -46,15 +46,17 @@ while [[ bucle == "si" ]]; do
   sleep 2
 done
 
+bucle="si"
 while [[ bucle == "si" ]]; do
-  #statements
-done
-if [[ estadocont2 == "RUNNING" ]];
-then
-  memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
-  if [[ $memoria2 -ge '980.00' ]];
+  if [[ estadocont2 == "RUNNING" ]];
   then
-    echo "Aumentando RAM de contenedor 2, por ram saturada"
-    lxc-cgroup -n debian2 memory.limit_in_bytes 2048M
+    memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
+    echo $memoria2
+    if [[ $memoria2 -ge '980.00' ]];
+    then
+      echo "Aumentando RAM de contenedor 2, por ram saturada"
+      lxc-cgroup -n debian2 memory.limit_in_bytes 2048M
+      bucle="no"
+    fi
   fi
-fi
+done
