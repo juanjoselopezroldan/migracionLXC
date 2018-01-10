@@ -12,7 +12,7 @@ while [[ $bucle == "si" ]]; do
     echo $memoria1
     if [[ $memoria1 -ge "470" ]];
     then
-      echo "Desaciendo iptables y apagando contenedor 1"
+      echo "Deshaciendo iptables y apagando contenedor 1"
       ip1=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 |  head -2 | tail -1)
       delip=$(iptables -t nat -L --line-number | egrep $ip1 | cut -d " " -f 1)
       iptables -t nat -D PREROUTING $delip
