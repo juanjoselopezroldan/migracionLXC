@@ -1,10 +1,11 @@
 #!/bin/bash
 echo "Iniciando"
 
-estadocont1=$(lxc-ls -f | grep debian1 | tr -s " " | cut -d " " -f 2)
 bucle="si"
-estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
 while [[ $bucle == "si" ]]; do
+
+  estadocont1=$(lxc-ls -f | grep debian1 | tr -s " " | cut -d " " -f 2)
+
   if [[ $estadocont1 == "RUNNING" ]];
   then
     memoria1=$(lxc-info -n debian1 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
@@ -30,7 +31,7 @@ while [[ $bucle == "si" ]]; do
       bucle="no"
     fi
   else
-    if [[ $estadocont2 == "STOPPED" ]] && [[ $estadocont1 == "STOPPED" ]] ;
+    if [[ $estadocont1 == "STOPPED" ]] ;
     then
       echo "Contenedor 1 inactivo, levantando..."
       lxc-start -n debian1
@@ -46,9 +47,11 @@ while [[ $bucle == "si" ]]; do
   sleep 2
 done
 
+estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
+
 bucle="si"
 while [[ $bucle == "si" ]]; do
-  if [[ estadocont2 == "RUNNING" ]];
+  if [[ $estadocont2 == "RUNNING" ]];
   then
     memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
     echo $memoria2
