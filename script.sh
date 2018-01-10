@@ -43,9 +43,10 @@ else
 fi
 
 
-#if [[ estadocont2 == "RUNNING" ]]; then
-#  memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
-#  if [[ $memoria2 -ge '980.00' ]]; then
-    #statements
-#  fi
-#fi
+if [[ estadocont2 == "RUNNING" ]]; then
+  memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
+  if [[ $memoria2 -ge '980.00' ]]; then
+    echo "Aumentando RAM de contenedor 2, por ram saturada"
+    lxc-cgroup -n debian2 memory.limit_in_bytes 2048M
+  fi
+fi
