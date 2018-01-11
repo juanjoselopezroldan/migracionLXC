@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "Iniciado"
+
 estadocont1=$(lxc-ls -f | grep debian1 | tr -s " " | cut -d " " -f 2)
+estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
 
 if [[ $estadocont1 == "RUNNING" ]];
 then
@@ -42,7 +44,6 @@ else
   fi
 fi
 
-estadocont2=$(lxc-ls -f | grep debian2 | tr -s " " | cut -d " " -f 2)
 if [[ $estadocont2 == "RUNNING" ]];
 then
   memoria2=$(lxc-info -n debian2 | grep 'Memory use' | tr -s " " | cut -d " " -f 3 | cut -d "." -f 1)
