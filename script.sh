@@ -26,7 +26,7 @@ while [[ $bucle == "si" ]]; do
 
       ip2=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 | tail -1)
       iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination $ip2:80
-      echo "Montando volumen"
+      echo "Asociando volumen y montando volumen"
       lxc-device -n debian2 add /dev/mapper/disco-lv1
       lxc-attach -n debian2 -- mount /dev/mapper/disco-lv1 /var/www/html
       lxc-attach -n debian2 -- systemctl restart apache2
@@ -37,7 +37,7 @@ while [[ $bucle == "si" ]]; do
   else
     echo "Contenedor 1 inactivo, levantando..."
     lxc-start -n debian1
-    echo "Montando volumen y obteniendo IP para regla de IPTABLES"
+    echo "Asociando volumen, montando volumen y obteniendo IP para regla de IPTABLES"
     sleep 2
     lxc-device -n debian1 add /dev/mapper/disco-lv1
     lxc-attach -n debian1 -- mount /dev/mapper/disco-lv1 /var/www/html
