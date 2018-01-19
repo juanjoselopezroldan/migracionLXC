@@ -16,7 +16,7 @@ while [[ $bucle == "si" ]]; do
       ip1=$(lxc-ls --fancy | tr -s " " | cut -d " " -f 5 |  head -2 | tail -1)
       delip=$(iptables -t nat -L --line-number | egrep $ip1 | cut -d " " -f 1)
       iptables -t nat -D PREROUTING $delip
-      lxc-attach -n debian1 -- umount /dev/mapper/disco-lv1 /var/www/html
+      lxc-attach -n debian1 -- umount /dev/mapper/disco-lv1
       lxc-device -n debian1 del /dev/mapper/disco-lv1
       lxc-stop -n debian1
 
